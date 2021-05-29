@@ -1,14 +1,4 @@
-'use strict';
-
-
-const puppeteer = require('puppeteer-extra');
-
-const StealthPlugin = require('puppeteer-extra-plugin-stealth')
-puppeteer.use(StealthPlugin())
-
-const AdblockerPlugin = require('puppeteer-extra-plugin-adblocker');
-const { PageEmittedEvents } = require('puppeteer');
-puppeteer.use(AdblockerPlugin({ blockTrackers: true }))
+'use strict'; 
 /**
  * An asynchronous bootstrap function that runs before
  * your application gets started.
