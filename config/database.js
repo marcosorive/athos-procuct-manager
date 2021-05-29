@@ -1,4 +1,22 @@
-module.exports = () => ({
+module.exports = ({ env }) => {
+const { host, port, database, user, password } = parse(env("DATABASE_URL"));
+
+const postgresSettings = {
+  client: "postgres",
+  host,
+  port,
+  database,
+  username: user,
+  password,
+  ssl: { rejectUnauthorized: false }
+}
+
+const sqliteSettings = {
+client: 'sqlite',
+filename: '.tmp/data.db'
+}
+
+return {
   defaultConnection: 'default',
   connections: {
     default: {
@@ -8,21 +26,10 @@ module.exports = () => ({
         useNullAsDefault: true,
       },
     },
-  },
-});
+  }}
+};
 
-const postgresSettings = {
-  client: 'postgres',
-  host: process.env.DATABASE_HOST || 'localhost',
-  port: process.env.DATABASE_PORT || "5432",
-  database: process.env.DATABASE_NAME || "strapi",
-  username: process.env.DATABASE_USERNAME || "strapi",
-  password: process.env.DATABASE_PASSWORD || "strapi"
-}
 
-const sqliteSettings = {
-client: 'sqlite',
-filename: '.tmp/data.db'
-}
+
 
 
